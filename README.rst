@@ -39,7 +39,7 @@ Usage and options
 
 Generate the project::
 
-  cookiecutter gh:ionelmc/cookiecutter-pylibrary
+  cookiecutter gh:sthysel/cookiecutter-pytool
 
 You will be asked for these fields:
 
