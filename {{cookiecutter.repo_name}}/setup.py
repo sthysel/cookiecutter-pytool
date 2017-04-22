@@ -24,7 +24,7 @@ def read(*names, **kwargs):
 setup(
     name='{{ cookiecutter.distribution_name }}',
     version='{{ cookiecutter.version }}',
-    license='BSD',
+    license='GPLv2',
     description={{ '{0!r}'.format(cookiecutter.project_short_description).lstrip('ub') }},
     long_description='%s\n%s' % (
         re.compile('^.. start-badges.*^.. end-badges', re.M | re.S).sub('', read('README.rst')),
