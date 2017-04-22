@@ -20,16 +20,16 @@ def read(*names, **kwargs):
         encoding=kwargs.get('encoding', 'utf8')
     ).read()
 
+readme = re.compile('^.. start-badges.*^.. end-badges', re.M | re.S).sub('', read('README.rst'))
+changelog = re.sub(':[a-z]+:`~?(.*?)`', r'``\1``', read('CHANGELOG.rst'))
+long_description = '{}\n{}'.format(readme, changelog)
 
 setup(
     name='{{ cookiecutter.distribution_name }}',
     version='{{ cookiecutter.version }}',
     license='GPLv2',
     description={{ '{0!r}'.format(cookiecutter.project_short_description).lstrip('ub') }},
-    long_description='%s\n%s' % (
-        re.compile('^.. start-badges.*^.. end-badges', re.M | re.S).sub('', read('README.rst')),
-        re.sub(':[a-z]+:`~?(.*?)`', r'``\1``', read('CHANGELOG.rst'))
-    ),
+    long_description=long_description,
     author={{ '{0!r}'.format(cookiecutter.full_name).lstrip('ub') }},
     author_email={{ '{0!r}'.format(cookiecutter.email).lstrip('ub') }},
     url='https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.repo_name }}',
@@ -39,9 +39,7 @@ setup(
     include_package_data=True,
     zip_safe=False,
     classifiers=[
-        # complete classifier list: http://pypi.python.org/pypi?%3Aaction=list_classifiers
-        'Development Status :: 5 - Production/Stable',
-        'Intended Audience :: Developers',
+        # 'Development Status :: 5 - Production/Stable',
         'License :: OSI Approved :: GPLv2',
         'Operating System :: Unix',
         'Operating System :: POSIX',
@@ -51,10 +49,6 @@ setup(
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: Implementation :: CPython',
         'Programming Language :: Python :: Implementation :: PyPy',
-        # uncomment if you test on these interpreters:
-        # 'Programming Language :: Python :: Implementation :: IronPython',
-        # 'Programming Language :: Python :: Implementation :: Jython',
-        # 'Programming Language :: Python :: Implementation :: Stackless',
         'Topic :: Utilities',
     ],
     keywords=[],
